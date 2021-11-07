@@ -3,14 +3,14 @@ package org.verigo.data_access.seeders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import org.verigo.data_access.RoleRepository;
-import org.verigo.models.constraints.ROLES;
+import org.verigo.data_access.RolesRepository;
+import org.verigo.models.constraints.ROLE;
 import org.verigo.models.Role;
 
 @Component
 public class RoleDataSeeder implements CommandLineRunner {
     @Autowired
-    RoleRepository roleRepository;
+    RolesRepository rolesRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -18,14 +18,14 @@ public class RoleDataSeeder implements CommandLineRunner {
     }
 
     private void loadRoleData() {
-        if(roleRepository.count() == 0) {
-            Role admin = new Role(ROLES.ADMIN,"ADMIN");
-            Role teacher = new Role(ROLES.TEACHER, "TEACHER");
-            Role student = new Role(ROLES.STUDENT, "STUDENT");
+        if(rolesRepository.count() == 0) {
+            Role admin = new Role(ROLE.ADMIN,"ADMIN");
+            Role teacher = new Role(ROLE.TEACHER, "TEACHER");
+            Role student = new Role(ROLE.STUDENT, "STUDENT");
 
-            roleRepository.save(admin);
-            roleRepository.save(teacher);
-            roleRepository.save(student);
+            rolesRepository.save(admin);
+            rolesRepository.save(teacher);
+            rolesRepository.save(student);
         }
     }
 }

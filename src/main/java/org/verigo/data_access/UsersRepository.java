@@ -3,6 +3,9 @@ package org.verigo.data_access;
 import org.verigo.models.User;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepository extends CrudRepository<User, Integer> {
+import java.util.List;
+
+public interface UsersRepository extends CrudRepository<User, Integer> {
     User findByLogin(String login);
+    List<User> findAll();
 }
