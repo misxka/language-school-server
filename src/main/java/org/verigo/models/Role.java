@@ -24,7 +24,17 @@ public class Role {
 
     public Role() {
         this.id = ROLE.STUDENT;
-        this.name = "NOT_ASSIGNED";
+        switch(this.id) {
+            case ADMIN:
+                this.name = "ADMIN";
+                break;
+            case TEACHER:
+                this.name = "TEACHER";
+                break;
+            case STUDENT:
+                this.name = "STUDENT";
+                break;
+        }
         this.users = null;
     }
 

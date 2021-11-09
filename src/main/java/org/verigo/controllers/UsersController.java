@@ -3,6 +3,7 @@ package org.verigo.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 import org.verigo.data_access.UsersRepository;
 import org.verigo.models.User;
@@ -22,5 +23,17 @@ public class UsersController {
         List<User> users = usersRepository.findAll();
 
         return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @PostMapping(path = "")
+    public @ResponseBody
+    ResponseEntity<User> addUser(@RequestBody User user) {
+
+        //TODO Add validation of login and password
+
+        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
+        User createdUser = usersRepository.save(user);
+
+        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 }

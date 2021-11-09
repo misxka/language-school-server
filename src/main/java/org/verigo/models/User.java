@@ -1,6 +1,8 @@
 package org.verigo.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -35,6 +37,28 @@ public class User {
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
+    @JsonCreator
+    public User(
+            @JsonProperty("login") String login,
+            @JsonProperty("surname") String surname,
+            @JsonProperty("name") String name,
+            @JsonProperty("password") String password,
+            @JsonProperty("createdAt") Date createdAt,
+            @JsonProperty("updatedAt") Date updatedAt,
+            @JsonProperty("role") Role role) {
+        this.login = login;
+        this.surname = surname;
+        this.name = name;
+        this.password = password;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.role = role;
+    }
+
+    @JsonCreator
+    public User() {
+
+    }
 
     public Integer getId() {
         return id;
