@@ -16,7 +16,7 @@ public class AuthController {
     @Autowired
     private UsersRepository usersRepository;
 
-    @PostMapping(path = "/")
+    @PostMapping(path = "")
     public @ResponseBody
     ResponseEntity<AuthResponse> authUser(@RequestBody AuthRequest req) {
         User user = usersRepository.findByLogin(req.getLogin());

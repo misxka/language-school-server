@@ -1,6 +1,7 @@
 package org.verigo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -17,7 +18,7 @@ public class UsersController {
     @Autowired
     private UsersRepository usersRepository;
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "")
     public @ResponseBody
     ResponseEntity<List<User>> getAll() {
         List<User> users = usersRepository.findAll();
@@ -31,9 +32,14 @@ public class UsersController {
 
         //TODO Add validation of login and password
 
-        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
-        User createdUser = usersRepository.save(user);
 
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+
+        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
+        try {
+            User createdUser = usersRepository.save(user);
+            return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+         } catch (DataIntegrityViolationException e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 }
