@@ -10,6 +10,7 @@ import org.verigo.data_access.UsersRepository;
 import org.verigo.models.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path="/users")
@@ -29,11 +30,6 @@ public class UsersController {
     @PostMapping(path = "")
     public @ResponseBody
     ResponseEntity<User> addUser(@RequestBody User user) {
-
-        //TODO Add validation of login and password
-
-
-
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
         try {
             User createdUser = usersRepository.save(user);
@@ -41,5 +37,16 @@ public class UsersController {
          } catch (DataIntegrityViolationException e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PutMapping(path = "/{id}")
+    public @ResponseBody
+    ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user) {
+        User foundUser = usersRepository.findById(id);
+        if(foundUser == null) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+
+        User updatedUser = usersRepository.save(foundUser.update(user));
+
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 }

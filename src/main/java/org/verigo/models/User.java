@@ -60,6 +60,18 @@ public class User {
 
     }
 
+    public User update(User user) {
+        this.login = user.login;
+        this.surname = user.surname;
+        this.name = user.name;
+        this.password = user.password;
+        this.createdAt = user.createdAt;
+        this.updatedAt = user.updatedAt;
+        this.role = user.role;
+
+        return this;
+    }
+
     public Integer getId() {
         return id;
     }
