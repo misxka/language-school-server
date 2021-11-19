@@ -59,9 +59,9 @@ public class UsersController {
             usersRepository.deleteById(id);
         } catch(EmptyResultDataAccessException e) {
             System.out.println(e);
-            return new ResponseEntity<>("User with such id not found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("{ \"message\": \"User with such id not found\" }", HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>("Successfully deleted", HttpStatus.OK);
+        return new ResponseEntity<>("{ \"message\": \"Successfully deleted\" }", HttpStatus.OK);
     }
 }
