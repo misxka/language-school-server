@@ -2,6 +2,7 @@ package org.verigo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -35,6 +36,7 @@ public class UsersController {
             User createdUser = usersRepository.save(user);
             return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
          } catch (DataIntegrityViolationException e) {
+            System.out.println(e);
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
@@ -48,5 +50,18 @@ public class UsersController {
         User updatedUser = usersRepository.save(foundUser.update(user));
 
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public @ResponseBody
+    ResponseEntity<String> deleteUser(@PathVariable int id) {
+        try {
+            usersRepository.deleteById(id);
+        } catch(EmptyResultDataAccessException e) {
+            System.out.println(e);
+            return new ResponseEntity<>("User with such id not found", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>("Successfully deleted", HttpStatus.OK);
     }
 }
