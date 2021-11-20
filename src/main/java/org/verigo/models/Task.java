@@ -1,6 +1,8 @@
 package org.verigo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -36,9 +38,11 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name="lesson_id", nullable = false)
+    @JsonBackReference
     private Lesson lesson;
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+    @JsonBackReference
     private Set<UserTask> userPoints;
 
 

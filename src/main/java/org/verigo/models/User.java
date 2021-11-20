@@ -1,8 +1,6 @@
 package org.verigo.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.verigo.models.user_task.UserTask;
@@ -40,9 +38,11 @@ public class User {
     private Role role;
 
     @ManyToMany(mappedBy = "participants")
+    @JsonManagedReference
     private Set<CourseGroup> groups;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<UserTask> taskPoints;
 
 

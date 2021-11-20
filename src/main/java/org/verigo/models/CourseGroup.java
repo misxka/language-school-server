@@ -1,7 +1,6 @@
 package org.verigo.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -17,6 +16,7 @@ public class CourseGroup {
 
     @ManyToOne
     @JoinColumn(name="course_id", nullable = false)
+    @JsonManagedReference
     private Course course;
 
     @ManyToMany
@@ -25,6 +25,7 @@ public class CourseGroup {
         joinColumns = @JoinColumn(name = "course_group_id"),
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )
+    @JsonBackReference
     private Set<User> participants;
 
     @CreatedDate
