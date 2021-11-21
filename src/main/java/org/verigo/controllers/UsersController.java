@@ -11,7 +11,6 @@ import org.verigo.data_access.UsersRepository;
 import org.verigo.models.User;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path="/users")

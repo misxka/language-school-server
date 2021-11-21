@@ -8,7 +8,7 @@ import org.verigo.data_access.UsersRepository;
 import org.verigo.models.Role;
 import org.verigo.models.User;
 import org.verigo.models.constraints.ROLE;
-
+import java.util.Calendar;
 import java.util.Date;
 
 @Component
@@ -287,6 +287,114 @@ public class UserDataSeeder implements CommandLineRunner {
             user12.setUpdatedAt(new Date());
 
             usersRepository.save(user12);
+
+
+            //previous years users
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.YEAR, 2020);
+
+            User oldUser1 = new User();
+            oldUser1.setLogin("oldAdmin1");
+            oldUser1.setPassword(BCrypt.hashpw("oldAdmin1", BCrypt.gensalt(12)));
+            oldUser1.setSurname("Сергеев");
+            oldUser1.setName("Андрей");
+            oldUser1.setRole(new Role(ROLE.ADMIN, "ADMIN"));
+            oldUser1.setCreatedAt(cal.getTime());
+            oldUser1.setUpdatedAt(cal.getTime());
+
+            usersRepository.save(oldUser1);
+
+            User oldUser2 = new User();
+            oldUser2.setLogin("oldAdmin2");
+            oldUser2.setPassword(BCrypt.hashpw("oldAdmin2", BCrypt.gensalt(12)));
+            oldUser2.setSurname("Сергеев");
+            oldUser2.setName("Андрей");
+            oldUser2.setRole(new Role(ROLE.ADMIN, "ADMIN"));
+            oldUser2.setCreatedAt(cal.getTime());
+            oldUser2.setUpdatedAt(cal.getTime());
+
+            usersRepository.save(oldUser2);
+
+            User oldUser3 = new User();
+            oldUser3.setLogin("oldStudent3");
+            oldUser3.setPassword(BCrypt.hashpw("oldStudent3", BCrypt.gensalt(12)));
+            oldUser3.setSurname("Сергеев");
+            oldUser3.setName("Андрей");
+            oldUser3.setRole(new Role(ROLE.STUDENT, "STUDENT"));
+            oldUser3.setCreatedAt(cal.getTime());
+            oldUser3.setUpdatedAt(cal.getTime());
+
+            usersRepository.save(oldUser3);
+
+            User oldUser4 = new User();
+            oldUser4.setLogin("oldTeacher4");
+            oldUser4.setPassword(BCrypt.hashpw("oldTeacher4", BCrypt.gensalt(12)));
+            oldUser4.setSurname("Сергеев");
+            oldUser4.setName("Андрей");
+            oldUser4.setRole(new Role(ROLE.TEACHER, "TEACHER"));
+            oldUser4.setCreatedAt(cal.getTime());
+            oldUser4.setUpdatedAt(cal.getTime());
+
+            usersRepository.save(oldUser4);
+
+            User oldUser5 = new User();
+            oldUser5.setLogin("oldAdmin7");
+            oldUser5.setPassword(BCrypt.hashpw("oldAdmin7", BCrypt.gensalt(12)));
+            oldUser5.setSurname("Сергеев");
+            oldUser5.setName("Андрей");
+            oldUser5.setRole(new Role(ROLE.ADMIN, "ADMIN"));
+            oldUser5.setCreatedAt(cal.getTime());
+            oldUser5.setUpdatedAt(cal.getTime());
+
+            usersRepository.save(oldUser5);
+
+            User oldUser6 = new User();
+            oldUser6.setLogin("oldTeacher1");
+            oldUser6.setPassword(BCrypt.hashpw("oldTeacher1", BCrypt.gensalt(12)));
+            oldUser6.setSurname("Сергеев");
+            oldUser6.setName("Андрей");
+            oldUser6.setRole(new Role(ROLE.TEACHER, "TEACHER"));
+            cal.set(Calendar.YEAR, 2019);
+            oldUser6.setCreatedAt(cal.getTime());
+            oldUser6.setUpdatedAt(cal.getTime());
+
+            usersRepository.save(oldUser6);
+
+            User oldUser7 = new User();
+            oldUser7.setLogin("oldStudent1");
+            oldUser7.setPassword(BCrypt.hashpw("oldStudent1", BCrypt.gensalt(12)));
+            oldUser7.setSurname("Сергеев");
+            oldUser7.setName("Андрей");
+            oldUser7.setRole(new Role(ROLE.STUDENT, "STUDENT"));
+            cal.set(Calendar.YEAR, 2019);
+            oldUser7.setCreatedAt(cal.getTime());
+            oldUser7.setUpdatedAt(cal.getTime());
+
+            usersRepository.save(oldUser7);
+
+            User oldUser8 = new User();
+            oldUser8.setLogin("oldStudent123");
+            oldUser8.setPassword(BCrypt.hashpw("oldStudent123", BCrypt.gensalt(12)));
+            oldUser8.setSurname("Сергеев");
+            oldUser8.setName("Андрей");
+            oldUser8.setRole(new Role(ROLE.STUDENT, "STUDENT"));
+            cal.set(Calendar.YEAR, 2019);
+            oldUser8.setCreatedAt(cal.getTime());
+            oldUser8.setUpdatedAt(cal.getTime());
+
+            usersRepository.save(oldUser8);
+
+            User oldUser9 = new User();
+            oldUser9.setLogin("oldStudent122");
+            oldUser9.setPassword(BCrypt.hashpw("oldStudent122", BCrypt.gensalt(12)));
+            oldUser9.setSurname("Сергеев");
+            oldUser9.setName("Андрей");
+            oldUser9.setRole(new Role(ROLE.STUDENT, "STUDENT"));
+            cal.set(Calendar.YEAR, 2019);
+            oldUser9.setCreatedAt(cal.getTime());
+            oldUser9.setUpdatedAt(cal.getTime());
+
+            usersRepository.save(oldUser9);
         }
     }
 }
