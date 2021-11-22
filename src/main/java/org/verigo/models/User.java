@@ -3,11 +3,9 @@ package org.verigo.models;
 import com.fasterxml.jackson.annotation.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.verigo.models.user_task.UserTask;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity(name = "users")
 public class User {
@@ -37,42 +35,6 @@ public class User {
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
-    @ManyToMany(mappedBy = "participants")
-    @JsonManagedReference
-    private Set<CourseGroup> groups;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Set<UserTask> taskPoints;
-
-
-    @JsonCreator
-    public User(
-            @JsonProperty("login") String login,
-            @JsonProperty("surname") String surname,
-            @JsonProperty("name") String name,
-            @JsonProperty("password") String password,
-            @JsonProperty("createdAt") Date createdAt,
-            @JsonProperty("updatedAt") Date updatedAt,
-            @JsonProperty("role") Role role,
-            @JsonProperty("groups") Set<CourseGroup> groups,
-            @JsonProperty("taskPoints") Set<UserTask> userTasks
-    ) {
-        this.login = login;
-        this.surname = surname;
-        this.name = name;
-        this.password = password;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.role = role;
-        this.groups = groups;
-        this.taskPoints = userTasks;
-    }
-
-    @JsonCreator
-    public User() {
-
-    }
 
     public User update(User user) {
         this.login = user.login;
@@ -82,8 +44,6 @@ public class User {
         this.createdAt = user.createdAt;
         this.updatedAt = user.updatedAt;
         this.role = user.role;
-        this.groups = user.groups;
-        this.taskPoints = user.taskPoints;
 
         return this;
     }
@@ -150,21 +110,5 @@ public class User {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public Set<CourseGroup> getGroups() {
-        return groups;
-    }
-
-    public void setGroups(Set<CourseGroup> groups) {
-        this.groups = groups;
-    }
-
-    public Set<UserTask> getTaskPoints() {
-        return taskPoints;
-    }
-
-    public void setTaskPoints(Set<UserTask> tasks) {
-        this.taskPoints = tasks;
     }
 }
