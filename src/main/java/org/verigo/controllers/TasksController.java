@@ -30,7 +30,7 @@ public class TasksController {
     }
 
     @PutMapping("/{taskId}/lesson/{lessonId}")
-    Task assignTeacherToSubject(
+    Task assignTaskToLesson(
             @PathVariable int taskId,
             @PathVariable int lessonId
     ) {
