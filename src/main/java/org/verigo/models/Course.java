@@ -1,15 +1,10 @@
 package org.verigo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.Set;
 
 @Entity(name = "courses")
@@ -29,9 +24,9 @@ public class Course {
     @JsonManagedReference
     private Set<Lesson> lessons;
 
-//    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-//    @JsonBackReference
-//    private Set<CourseGroup> groups;
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<CourseGroup> groups;
 
 
     public Integer getId() {
@@ -54,9 +49,9 @@ public class Course {
         return lessons;
     }
 
-//    public Set<CourseGroup> getGroups() {
-//        return groups;
-//    }
+    public Set<CourseGroup> getGroups() {
+        return groups;
+    }
 
 
     public void setId(Integer id) {
@@ -79,7 +74,7 @@ public class Course {
         this.lessons = lessons;
     }
 
-//    public void setGroups(Set<CourseGroup> groups) {
-//        this.groups = groups;
-//    }
+    public void setGroups(Set<CourseGroup> groups) {
+        this.groups = groups;
+    }
 }

@@ -6,7 +6,6 @@ import org.verigo.data_access.CoursesRepository;
 import org.verigo.data_access.LessonsRepository;
 import org.verigo.models.Course;
 import org.verigo.models.Lesson;
-import org.verigo.models.Task;
 
 import java.util.List;
 

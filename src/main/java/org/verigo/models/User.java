@@ -6,6 +6,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "users")
 public class User {
@@ -34,6 +36,11 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
+
+    @ManyToMany(mappedBy = "participants")
+    @JsonIgnoreProperties("participants")
+    private Set<CourseGroup> groups = new HashSet<>();
+
 
 
     public User update(User user) {
@@ -110,5 +117,13 @@ public class User {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Set<CourseGroup> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<CourseGroup> groups) {
+        this.groups = groups;
     }
 }
