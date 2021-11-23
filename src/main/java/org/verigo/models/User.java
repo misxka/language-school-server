@@ -16,7 +16,7 @@ public class User {
     @Column(unique = true)
     private String login;
 
-    @JsonIgnore
+    //TODO Try to find a solution to hide password hash in JSON
     private String password;
 
     private String surname;
