@@ -3,6 +3,7 @@ package org.verigo.models;
 import com.fasterxml.jackson.annotation.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.verigo.models.user_task_result.UserTaskResult;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -41,6 +42,9 @@ public class User {
     @JsonIgnoreProperties("participants")
     private Set<CourseGroup> groups = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("usersResults")
+    private Set<UserTaskResult> tasksResults;
 
 
     public User update(User user) {
@@ -125,5 +129,13 @@ public class User {
 
     public void setGroups(Set<CourseGroup> groups) {
         this.groups = groups;
+    }
+
+    public Set<UserTaskResult> getTasksResults() {
+        return tasksResults;
+    }
+
+    public void setTasksResults(Set<UserTaskResult> tasksResults) {
+        this.tasksResults = tasksResults;
     }
 }

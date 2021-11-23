@@ -1,8 +1,11 @@
 package org.verigo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.verigo.models.user_task_result.UserTaskResult;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name = "tasks")
 public class Task {
@@ -24,6 +27,10 @@ public class Task {
     @JoinColumn(name="lesson_id")
     @JsonBackReference
     private Lesson lesson;
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("tasksResults")
+    private Set<UserTaskResult> usersResults;
 
 
     public Integer getId() {
@@ -50,6 +57,9 @@ public class Task {
         return lesson;
     }
 
+    public Set<UserTaskResult> getUsersResults() {
+        return usersResults;
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -73,5 +83,9 @@ public class Task {
 
     public void setLesson(Lesson lesson) {
         this.lesson = lesson;
+    }
+
+    public void setUsersResults(Set<UserTaskResult> usersResults) {
+        this.usersResults = usersResults;
     }
 }
