@@ -6,6 +6,5 @@ import org.verigo.models.Task;
 import java.util.List;
 
 public interface TasksRepository extends CrudRepository<Task, Integer> {
-    Task findById(int id);
     List<Task> findAll();
 }

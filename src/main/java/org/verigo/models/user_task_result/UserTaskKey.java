@@ -1,6 +1,4 @@
-package org.verigo.models.user_task;
-
-import org.verigo.models.User;
+package org.verigo.models.user_task_result;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

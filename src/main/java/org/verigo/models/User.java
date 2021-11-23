@@ -3,10 +3,11 @@ package org.verigo.models;
 import com.fasterxml.jackson.annotation.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.verigo.models.user_task.UserTask;
+import org.verigo.models.user_task_result.UserTaskResult;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "users")
@@ -18,7 +19,7 @@ public class User {
     @Column(unique = true)
     private String login;
 
-    @JsonIgnore
+    //TODO Try to find a solution to hide password hash in JSON
     private String password;
 
     private String surname;
@@ -38,41 +39,13 @@ public class User {
     private Role role;
 
     @ManyToMany(mappedBy = "participants")
-    @JsonManagedReference
-    private Set<CourseGroup> groups;
+    @JsonIgnoreProperties("participants")
+    private Set<CourseGroup> groups = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Set<UserTask> taskPoints;
+    @JsonIgnoreProperties("usersResults")
+    private Set<UserTaskResult> tasksResults;
 
-
-    @JsonCreator
-    public User(
-            @JsonProperty("login") String login,
-            @JsonProperty("surname") String surname,
-            @JsonProperty("name") String name,
-            @JsonProperty("password") String password,
-            @JsonProperty("createdAt") Date createdAt,
-            @JsonProperty("updatedAt") Date updatedAt,
-            @JsonProperty("role") Role role,
-            @JsonProperty("groups") Set<CourseGroup> groups,
-            @JsonProperty("taskPoints") Set<UserTask> userTasks
-    ) {
-        this.login = login;
-        this.surname = surname;
-        this.name = name;
-        this.password = password;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.role = role;
-        this.groups = groups;
-        this.taskPoints = userTasks;
-    }
-
-    @JsonCreator
-    public User() {
-
-    }
 
     public User update(User user) {
         this.login = user.login;
@@ -82,8 +55,6 @@ public class User {
         this.createdAt = user.createdAt;
         this.updatedAt = user.updatedAt;
         this.role = user.role;
-        this.groups = user.groups;
-        this.taskPoints = user.taskPoints;
 
         return this;
     }
@@ -160,11 +131,11 @@ public class User {
         this.groups = groups;
     }
 
-    public Set<UserTask> getTaskPoints() {
-        return taskPoints;
+    public Set<UserTaskResult> getTasksResults() {
+        return tasksResults;
     }
 
-    public void setTaskPoints(Set<UserTask> tasks) {
-        this.taskPoints = tasks;
+    public void setTasksResults(Set<UserTaskResult> tasksResults) {
+        this.tasksResults = tasksResults;
     }
 }

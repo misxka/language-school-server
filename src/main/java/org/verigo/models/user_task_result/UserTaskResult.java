@@ -1,15 +1,13 @@
-package org.verigo.models.user_task;
+package org.verigo.models.user_task_result;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.verigo.models.Task;
 import org.verigo.models.User;
 
 import javax.persistence.*;
 
-@Entity(name = "user_task")
-public class UserTask {
+@Entity(name = "user_task_result")
+public class UserTaskResult {
     @EmbeddedId
     UserTaskKey id;
 
@@ -27,30 +25,26 @@ public class UserTask {
 
     private int points;
 
+    @Column(name = "is_completed", columnDefinition = "TINYINT(1)")
+    private boolean isCompleted;
 
-    @JsonCreator
-    public UserTask(
-            @JsonProperty("user") User user,
-            @JsonProperty("task") Task task,
-            @JsonProperty("points") int points
-    ) {
+    public UserTaskResult() {
+
+    }
+
+    public UserTaskResult(UserTaskKey id, User user, Task task) {
+        this.id = id;
+        this.user = user;
+        this.task = task;
+        this.isCompleted = false;
+    }
+
+    public UserTaskResult(UserTaskKey id, User user, Task task, int points) {
+        this.id = id;
         this.user = user;
         this.task = task;
         this.points = points;
-    }
-
-    @JsonCreator
-    public UserTask() {
-
-    }
-
-
-    public UserTask update(UserTask userTask) {
-        this.user = userTask.user;
-        this.task = userTask.task;
-        this.points = userTask.points;
-
-        return this;
+        this.isCompleted = true;
     }
 
 
@@ -70,6 +64,9 @@ public class UserTask {
         return id;
     }
 
+    public boolean isCompleted() {
+        return isCompleted;
+    }
 
     public void setId(UserTaskKey id) {
         this.id = id;
@@ -85,5 +82,9 @@ public class UserTask {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
     }
 }

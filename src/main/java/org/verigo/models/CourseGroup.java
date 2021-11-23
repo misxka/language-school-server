@@ -1,11 +1,8 @@
 package org.verigo.models;
 
 import com.fasterxml.jackson.annotation.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
 import javax.persistence.*;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "course_groups")
@@ -14,9 +11,9 @@ public class CourseGroup {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name="course_id", nullable = false)
-    @JsonManagedReference
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="course_id")
+    @JsonBackReference
     private Course course;
 
     @ManyToMany
@@ -25,45 +22,9 @@ public class CourseGroup {
         joinColumns = @JoinColumn(name = "course_group_id"),
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    @JsonBackReference
-    private Set<User> participants;
+    @JsonIgnoreProperties("groups")
+    private Set<User> participants = new HashSet<>();
 
-    @CreatedDate
-    @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "DATETIME(0)")
-    private Date createdAt;
-
-    @LastModifiedDate
-    @Column(name = "updated_at", columnDefinition = "DATETIME(0)")
-    private Date updatedAt;
-
-
-    @JsonCreator
-    public CourseGroup(
-            @JsonProperty("course") Course course,
-            @JsonProperty("participants") Set<User> participants,
-            @JsonProperty("createdAt") Date createdAt,
-            @JsonProperty("updatedAt") Date updatedAt
-    ) {
-        this.course = course;
-        this.participants = participants;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
-    @JsonCreator
-    public CourseGroup() {
-
-    }
-
-
-    public CourseGroup update(CourseGroup courseGroup) {
-        this.course = courseGroup.course;
-        this.participants = courseGroup.participants;
-        this.createdAt = courseGroup.createdAt;
-        this.updatedAt = courseGroup.updatedAt;
-
-        return this;
-    }
 
 
     public Integer getId() {
@@ -89,5 +50,9 @@ public class CourseGroup {
 
     public void setParticipants(Set<User> participants) {
         this.participants = participants;
+    }
+
+    public void addParticipants(User user) {
+        this.participants.add(user);
     }
 }
