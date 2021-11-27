@@ -1,6 +1,7 @@
 package org.verigo.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -44,6 +45,7 @@ public class Course {
         return price;
     }
 
+    @JsonProperty(value = "isOnline")
     public boolean isOnline() {
         return isOnline;
     }
@@ -77,8 +79,8 @@ public class Course {
         this.price = price;
     }
 
-    public void setOnline(boolean online) {
-        isOnline = online;
+    public void setOnline(boolean isOnline) {
+        this.isOnline = isOnline;
     }
 
     public void setLessons(Set<Lesson> lessons) {

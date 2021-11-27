@@ -2,6 +2,7 @@ package org.verigo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.verigo.models.user_task_result.UserTaskResult;
 
 import javax.persistence.*;
@@ -45,6 +46,7 @@ public class Task {
         return description;
     }
 
+    @JsonProperty(value = "isHometask")
     public boolean isHometask() {
         return isHometask;
     }
@@ -73,8 +75,8 @@ public class Task {
         this.description = description;
     }
 
-    public void setHometask(boolean hometask) {
-        isHometask = hometask;
+    public void setIsHometask(boolean isHometask) {
+        this.isHometask = isHometask;
     }
 
     public void setMaxPoints(int maxPoints) {

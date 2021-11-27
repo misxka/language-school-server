@@ -1,7 +1,7 @@
 package org.verigo.models.user_task_result;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.verigo.models.Task;
 import org.verigo.models.User;
 
@@ -65,6 +65,7 @@ public class UserTaskResult {
         return id;
     }
 
+    @JsonProperty(value = "isCompleted")
     public boolean isCompleted() {
         return isCompleted;
     }
@@ -85,7 +86,7 @@ public class UserTaskResult {
         this.points = points;
     }
 
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
+    public void setCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 }

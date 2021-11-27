@@ -7,7 +7,6 @@ import org.verigo.data_access.UsersRepository;
 import org.verigo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.verigo.models.constraints.ROLE;
 
 @RestController
 @RequestMapping(path="/auth")
@@ -22,10 +21,10 @@ public class AuthController {
         User user = usersRepository.findByLogin(req.getLogin());
 
         if(user == null || !BCrypt.checkpw(req.getPassword(), user.getPassword())) {
-            return new ResponseEntity<>(new AuthResponse("Failed", user.getRole().getId()), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new AuthResponse("Failed", user), HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(new AuthResponse("Success", user.getRole().getId()), HttpStatus.OK);
+        return new ResponseEntity<>(new AuthResponse("Success", user), HttpStatus.OK);
     }
 }
 
@@ -49,18 +48,18 @@ class AuthRequest {
 
 class AuthResponse {
     private String message;
-    private ROLE role;
+    private User user;
 
-    public AuthResponse(String message, ROLE role) {
+    public AuthResponse(String message, User user) {
         this.message = message;
-        this.role = role;
+        this.user = user;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public ROLE getRole() {
-        return role;
+    public User getUser() {
+        return user;
     }
 }
