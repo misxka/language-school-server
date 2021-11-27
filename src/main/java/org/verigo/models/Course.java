@@ -1,6 +1,5 @@
 package org.verigo.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -16,6 +15,10 @@ public class Course {
     private String title;
 
     private BigDecimal price;
+
+    private String language;
+
+    private String level;
 
     @Column(name = "is_online", columnDefinition = "TINYINT(1)")
     private boolean isOnline;
@@ -53,6 +56,14 @@ public class Course {
         return groups;
     }
 
+    public String getLanguage() {
+        return language;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
 
     public void setId(Integer id) {
         this.id = id;
@@ -76,5 +87,13 @@ public class Course {
 
     public void setGroups(Set<CourseGroup> groups) {
         this.groups = groups;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 }

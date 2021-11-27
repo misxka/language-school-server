@@ -1,6 +1,7 @@
 package org.verigo.models.user_task_result;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.verigo.models.Task;
 import org.verigo.models.User;
 
@@ -14,13 +15,13 @@ public class UserTaskResult {
     @ManyToOne
     @MapsId("userId")
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference
+    @JsonIgnore
     private User user;
 
     @ManyToOne
     @MapsId("taskId")
     @JoinColumn(name = "task_id", nullable = false)
-    @JsonBackReference
+    @JsonIgnore
     private Task task;
 
     private int points;
