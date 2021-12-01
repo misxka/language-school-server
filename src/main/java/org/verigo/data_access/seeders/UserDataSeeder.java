@@ -101,33 +101,33 @@ public class UserDataSeeder implements CommandLineRunner {
             usersRepository.save(user06);
 
             User user07 = new User();
-            user07.setLogin("teacher07");
+            user07.setLogin("student07");
             user07.setPassword(BCrypt.hashpw("12345678qwerty", BCrypt.gensalt(12)));
             user07.setSurname("Иванов");
             user07.setName("Иван");
-            user07.setRole(new Role(ROLE.TEACHER, "TEACHER"));
+            user07.setRole(new Role(ROLE.STUDENT, "STUDENT"));
             user07.setCreatedAt(new Date());
             user07.setUpdatedAt(new Date());
 
             usersRepository.save(user07);
 
             User user08 = new User();
-            user08.setLogin("teacher08");
+            user08.setLogin("student08");
             user08.setPassword(BCrypt.hashpw("12345678qwerty", BCrypt.gensalt(12)));
-            user08.setSurname("Иванов");
+            user08.setSurname("Круглов");
             user08.setName("Иван");
-            user08.setRole(new Role(ROLE.TEACHER, "TEACHER"));
+            user08.setRole(new Role(ROLE.STUDENT, "STUDENT"));
             user08.setCreatedAt(new Date());
             user08.setUpdatedAt(new Date());
 
             usersRepository.save(user08);
 
             User user09 = new User();
-            user09.setLogin("teacher09");
+            user09.setLogin("student09");
             user09.setPassword(BCrypt.hashpw("12345678qwerty", BCrypt.gensalt(12)));
-            user09.setSurname("Иванов");
+            user09.setSurname("Лавров");
             user09.setName("Иван");
-            user09.setRole(new Role(ROLE.TEACHER, "TEACHER"));
+            user09.setRole(new Role(ROLE.STUDENT, "STUDENT"));
             user09.setCreatedAt(new Date());
             user09.setUpdatedAt(new Date());
 
