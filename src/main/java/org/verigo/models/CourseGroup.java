@@ -11,6 +11,8 @@ public class CourseGroup {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    private String name;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="course_id")
     @JsonBackReference
@@ -25,6 +27,13 @@ public class CourseGroup {
     @JsonIgnoreProperties("groups")
     private Set<User> participants = new HashSet<>();
 
+    public CourseGroup() {
+
+    }
+
+    public CourseGroup(String name) {
+        this.name = name;
+    }
 
 
     public Integer getId() {
@@ -39,6 +48,9 @@ public class CourseGroup {
         return course;
     }
 
+    public String getName() {
+        return name;
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -54,5 +66,9 @@ public class CourseGroup {
 
     public void addParticipants(User user) {
         this.participants.add(user);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

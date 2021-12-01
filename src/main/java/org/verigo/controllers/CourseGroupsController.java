@@ -27,12 +27,20 @@ public class CourseGroupsController {
         return courseGroupsRepository.findAll();
     }
 
+    @GetMapping(path = "/{groupId}")
+    CourseGroup getGroupById(@PathVariable int groupId) {
+        CourseGroup courseGroup = courseGroupsRepository.findById(groupId).get();
+
+        return  courseGroup;
+    }
+
     @PutMapping("/course/{courseId}")
     CourseGroup assignGroupToCourse(
-        @PathVariable int courseId
+        @PathVariable int courseId,
+        @RequestBody CourseGroup body
     ) {
         Course course = coursesRepository.findById(courseId).get();
-        CourseGroup group = new CourseGroup();
+        CourseGroup group = new CourseGroup(body.getName());
         group.setCourse(course);
         return courseGroupsRepository.save(group);
     }

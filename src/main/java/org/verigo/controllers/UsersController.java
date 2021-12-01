@@ -27,6 +27,14 @@ public class UsersController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
+    @GetMapping(path = "/{userId}")
+    public @ResponseBody
+    ResponseEntity<User> getUserById(@PathVariable int userId) {
+        User user = usersRepository.findById(userId);
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
     @PostMapping(path = "")
     public @ResponseBody
     ResponseEntity<User> addUser(@RequestBody User user) {
