@@ -50,11 +50,23 @@ public class UsersController {
 
     @PutMapping(path = "/{id}")
     public @ResponseBody
-    ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user) {
+    ResponseEntity<User> updateUserCompletely(@PathVariable int id, @RequestBody User user) {
         User foundUser = usersRepository.findById(id);
         if(foundUser == null) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 
         User updatedUser = usersRepository.save(foundUser.update(user));
+
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
+
+    @PatchMapping(path = "/{id}")
+    public @ResponseBody
+    ResponseEntity<User> updateUserPartially(@PathVariable int id, @RequestBody User user) {
+        User foundUser = usersRepository.findById(id);
+        if(foundUser == null) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+
+        if(user.getTasksResults() != null) foundUser.setTasksResults(user.getTasksResults());
+        User updatedUser = usersRepository.save(foundUser);
 
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
