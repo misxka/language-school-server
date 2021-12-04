@@ -15,7 +15,7 @@ public class CourseGroup {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="course_id")
-    @JsonBackReference
+    @JsonIgnoreProperties("groups")
     private Course course;
 
     @ManyToMany
