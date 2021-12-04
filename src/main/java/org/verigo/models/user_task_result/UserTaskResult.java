@@ -21,7 +21,7 @@ public class UserTaskResult {
     @ManyToOne
     @MapsId("taskId")
     @JoinColumn(name = "task_id", nullable = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Task task;
 
     private int points;
