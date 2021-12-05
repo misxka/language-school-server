@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 import org.verigo.models.user_task_result.UserTaskResult;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity(name = "tasks")
 public class Task {
@@ -29,7 +29,7 @@ public class Task {
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("task")
-    private Set<UserTaskResult> usersResults;
+    private List<UserTaskResult> usersResults;
 
 
     public Integer getId() {
@@ -57,7 +57,7 @@ public class Task {
         return lesson;
     }
 
-    public Set<UserTaskResult> getUsersResults() {
+    public List<UserTaskResult> getUsersResults() {
         return usersResults;
     }
 
@@ -85,7 +85,7 @@ public class Task {
         this.lesson = lesson;
     }
 
-    public void setUsersResults(Set<UserTaskResult> usersResults) {
+    public void setUsersResults(List<UserTaskResult> usersResults) {
         this.usersResults = usersResults;
     }
 }

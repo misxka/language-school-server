@@ -1,11 +1,10 @@
 package org.verigo.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "course_groups")
 public class CourseGroup {
@@ -27,7 +26,7 @@ public class CourseGroup {
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     @JsonIgnoreProperties("groups")
-    private Set<User> participants = new HashSet<>();
+    private List<User> participants = new ArrayList<>();
 
     public CourseGroup() {
 
@@ -42,7 +41,7 @@ public class CourseGroup {
         return id;
     }
 
-    public Set<User> getParticipants() {
+    public List<User> getParticipants() {
         return participants;
     }
 
@@ -62,7 +61,7 @@ public class CourseGroup {
         this.course = course;
     }
 
-    public void setParticipants(Set<User> participants) {
+    public void setParticipants(List<User> participants) {
         this.participants = participants;
     }
 

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 @Entity(name = "courses")
 public class Course {
@@ -25,11 +25,11 @@ public class Course {
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Set<Lesson> lessons;
+    private List<Lesson> lessons;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("course")
-    private Set<CourseGroup> groups;
+    private List<CourseGroup> groups;
 
 
     public Integer getId() {
@@ -49,11 +49,11 @@ public class Course {
         return isOnline;
     }
 
-    public Set<Lesson> getLessons() {
+    public List<Lesson> getLessons() {
         return lessons;
     }
 
-    public Set<CourseGroup> getGroups() {
+    public List<CourseGroup> getGroups() {
         return groups;
     }
 
@@ -82,11 +82,11 @@ public class Course {
         this.isOnline = isOnline;
     }
 
-    public void setLessons(Set<Lesson> lessons) {
+    public void setLessons(List<Lesson> lessons) {
         this.lessons = lessons;
     }
 
-    public void setGroups(Set<CourseGroup> groups) {
+    public void setGroups(List<CourseGroup> groups) {
         this.groups = groups;
     }
 

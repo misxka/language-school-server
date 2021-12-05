@@ -6,9 +6,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.verigo.models.user_task_result.UserTaskResult;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity(name = "users")
 public class User {
@@ -39,11 +37,11 @@ public class User {
 
     @ManyToMany(mappedBy = "participants")
     @JsonIgnoreProperties("participants")
-    private Set<CourseGroup> groups = new HashSet<>();
+    private List<CourseGroup> groups = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "user-results")
-    private Set<UserTaskResult> tasksResults;
+    private List<UserTaskResult> tasksResults = new ArrayList<>();
 
 
     public User update(User user) {
@@ -122,19 +120,19 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-    public Set<CourseGroup> getGroups() {
+    public List<CourseGroup> getGroups() {
         return groups;
     }
 
-    public void setGroups(Set<CourseGroup> groups) {
+    public void setGroups(List<CourseGroup> groups) {
         this.groups = groups;
     }
 
-    public Set<UserTaskResult> getTasksResults() {
+    public List<UserTaskResult> getTasksResults() {
         return tasksResults;
     }
 
-    public void setTasksResults(Set<UserTaskResult> tasksResults) {
+    public void setTasksResults(List<UserTaskResult> tasksResults) {
         this.tasksResults = tasksResults;
     }
 }
