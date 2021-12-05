@@ -1,9 +1,6 @@
 package org.verigo.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import org.verigo.models.user_task_result.UserTaskResult;
 
 import javax.persistence.*;
@@ -31,7 +28,7 @@ public class Task {
     private Lesson lesson;
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @JsonIgnoreProperties("task")
     private Set<UserTaskResult> usersResults;
 
 

@@ -19,7 +19,6 @@ public class User {
     @Column(unique = true)
     private String login;
 
-    //TODO Try to find a solution to hide password hash in JSON
     private String password;
 
     private String surname;
@@ -43,7 +42,7 @@ public class User {
     private Set<CourseGroup> groups = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("usersResults")
+    @JsonManagedReference(value = "user-results")
     private Set<UserTaskResult> tasksResults;
 
 

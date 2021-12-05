@@ -1,7 +1,6 @@
 package org.verigo.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -29,7 +28,7 @@ public class Course {
     private Set<Lesson> lessons;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonIgnoreProperties("course")
     private Set<CourseGroup> groups;
 
 
