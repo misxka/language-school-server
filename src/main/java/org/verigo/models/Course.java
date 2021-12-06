@@ -12,6 +12,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(unique = true)
     private String title;
 
     private BigDecimal price;

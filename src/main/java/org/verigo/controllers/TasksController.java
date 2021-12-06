@@ -1,6 +1,7 @@
 package org.verigo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.*;
 import org.verigo.data_access.LessonsRepository;
@@ -28,7 +29,12 @@ public class TasksController {
 
     @PostMapping
     Task createTask(@RequestBody Task task) {
-        return tasksRepository.save(task);
+        try {
+            return tasksRepository.save(task);
+        }  catch (DataIntegrityViolationException e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
     @PutMapping("/{taskId}/lesson/{lessonId}")

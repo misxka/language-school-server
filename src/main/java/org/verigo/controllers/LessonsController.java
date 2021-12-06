@@ -1,6 +1,7 @@
 package org.verigo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.*;
 import org.verigo.data_access.CoursesRepository;
@@ -28,7 +29,12 @@ public class LessonsController {
 
     @PostMapping
     Lesson createLesson(@RequestBody Lesson lesson) {
-        return lessonsRepository.save(lesson);
+        try {
+            return lessonsRepository.save(lesson);
+        }  catch (DataIntegrityViolationException e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
     @PutMapping("/{lessonId}/course/{courseId}")

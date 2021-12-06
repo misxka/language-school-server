@@ -1,7 +1,10 @@
 package org.verigo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.verigo.data_access.CoursesRepository;
 import org.verigo.models.Course;
@@ -29,7 +32,12 @@ public class CoursesController {
 
     @PostMapping
     Course createCourse(@RequestBody Course course) {
-        return coursesRepository.save(course);
+        try {
+            return coursesRepository.save(course);
+        } catch (DataIntegrityViolationException e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
     @DeleteMapping("/{id}")

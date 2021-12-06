@@ -12,6 +12,7 @@ public class Lesson {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(unique = true)
     private String title;
 
     @OneToMany(mappedBy = "lesson", cascade = CascadeType.ALL)

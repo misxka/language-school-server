@@ -12,6 +12,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(unique = true)
     private String title;
 
     @Column(columnDefinition = "TEXT")
